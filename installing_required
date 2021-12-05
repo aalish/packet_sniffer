@@ -11,6 +11,9 @@ echo""
 echo "${green}Installed all the package I think..............."
 sleep 2
 
+#touch /bin/packet-sniffer
+#echo pwd > /bin/packet-sniffer
+
 
 
 #sudo cp packets-sniff /bin/packets-sniff 
