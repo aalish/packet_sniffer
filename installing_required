@@ -2,13 +2,12 @@
 sudo apt-get install tshark
 sudo apt-get install dsniff
 sudo apt-get install xterm
-sudo apt-get install touch
-green=`tput setaf 1`
+red=`tput setaf 1`
 sleep 2
 echo ""
-echo "${green}Check if error installing following packages${green}"
+echo "${red}Check if error installing following packages${red}"
 echo""
-echo "${green}Installed all the package I think..............."
+echo "${red}Installed all the package I think..............."
 sleep 2
 
 #touch /bin/packet-sniffer
