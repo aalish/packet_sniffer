@@ -2,6 +2,9 @@
 sudo apt-get install tshark
 sudo apt-get install dsniff
 sudo apt-get install xterm
+sudo apt-get install openssl
+sudo apt-get install sslsplit
+sudo apt-get install expect
 red=`tput setaf 1`
 sleep 2
 echo ""
