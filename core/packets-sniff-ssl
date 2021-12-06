@@ -30,8 +30,8 @@ wifi_interface=$(iw dev | awk '$1=="Interface"{print $2}')
 #This generates a key for fake ssl certificate 
 openssl genrsa -out ca.key 4096
 #This scripts automatically generate certificate to be used  
-chmod +x create_certificate
-./create_certificate
+chmod +x core/create_certificate
+./core/create_certificate
 #using arpspoof and running the process in background throwing output to background
 #Not effective way
 #sudo arpspoof -i $wifi_interface $ip_addr > /dev/null 2>&1 &

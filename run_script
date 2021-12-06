@@ -1,0 +1,46 @@
+#!/bin/bash
+RED=`tput setaf 1`
+Purple=`tput setaf 3`
+Cyan=`tput setaf 6`
+Blue=`tput setaf 4`
+
+echo "          ${Purple}*************************************"
+sleep 0.25
+echo "          ${Purple}*                                   *"
+sleep 0.25
+echo "          ${Purple}*                                   *"
+sleep 0.25
+echo "          ${Purple}*          A Script                 *"
+sleep 0.25
+echo "          ${Purple}*            TO                     *"
+sleep 0.25
+echo "          ${Purple}*        Sniff Packet               *"
+sleep 0.25
+echo "          ${Purple}*                                   *"
+sleep 0.25
+echo "          ${Purple}*                                   *"
+sleep 0.25
+echo "          ${Purple}*                                   *"
+sleep 0.25
+echo "          ${Purple}*                                   *"
+sleep 0.25
+echo "          ${Purple}*                      Zero code    *"
+
+sleep 0.25
+echo "          ${Purple}*************************************"
+sleep 0.5
+echo ""
+echo "${Cyan}How do you want to run the script?"
+echo "    ${Blue}1 = without striping SSL"
+
+echo "    ${Blue}2 = with striping SSL"
+read user_input
+if [[ $user_input -eq 1 ]]
+then
+  ./core/packets-sniff
+elif [[ $user_input -eq 2 ]]
+then
+  ./core/packets-sniff-ssl
+else
+  echo "${RED}PLEASE ENTER VALID INPUT"
+fi

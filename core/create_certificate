@@ -43,7 +43,7 @@ if {$force_conservative} {
 
 
 set timeout -1
-spawn openssl req -new -x509 -days 1826 -key ca.key -out ca.crt
+spawn openssl req -new -x509 -days 1826 -key ../ca.key -out ../ca.crt
 match_max 100000
 expect -exact "You are about to be asked to enter information that will be incorporated\r
 into your certificate request.\r
