@@ -26,6 +26,8 @@ sudo iptables -t nat -A PREROUTING -p tcp --destination-port 80 -j REDIRECT --to
 
 #enabling ip forward
 echo "1" | sudo tee /proc/sys/net/ipv4/ip_forward
+echo ""
+echo "Output of the capture will be saved in output folder."
 #getting wifi interface
 wifi_interface=$(iw dev | awk '$1=="Interface"{print $2}')
 

