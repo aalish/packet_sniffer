@@ -1,5 +1,5 @@
 # Prajwal Chhetri
-I'm a network and system engineer with interests in networking. Aside from system and network, I have a keen interest in cyber security and thus look forward to improve my knowledge. 
+Highly skilled IT professional with a focus on cybersecurity and system engineering. Strong background in network administration, with experience in design, implementation, and maintenance of secure networks. Adept at identifying and mitigating cybersecurity threats, implementing security protocols, and maintaining regulatory compliance. Experience with a wide range of technologies including network security, firewalls, intrusion detection and prevention systems, VPN, and PKI. Proven track record of successful project management and team leadership. Strong analytical, problem-solving and communication skills. 
 
 
    <p align="left">
@@ -9,4 +9,4 @@ I'm a network and system engineer with interests in networking. Aside from syste
          <img alt="total stars" title="Total stars on GitHub" src="https://custom-icon-badges.demolab.com/github/stars/aalish?color=55960c&style=for-the-badge&labelColor=488207&logo=star"/></a>
    </p>
 
-<p align="center"> <img src="https://github-readme-stats.vercel.app/api?username=aalish&show_icons=true&theme=tokyonight&count_private=true" alt="m4tt72" />
+<p align="center"> <img src="https://github-stats-alpha.vercel.app/api?username=aalish&show_icons=true&theme=tokyonight&count_private=true" alt="m4tt72" />
